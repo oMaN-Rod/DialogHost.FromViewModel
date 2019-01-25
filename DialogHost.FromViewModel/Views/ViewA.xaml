@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="DialogHost.FromViewModel.Views.ViewA"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="1024">
+    <DataGrid AutoGenerateColumns="False"
+                                      SelectionMode="Single"
+                                      SelectionUnit="FullRow"
+                                      ItemsSource="{Binding ConfigFiles}"
+                                      SelectedItem="{Binding SelectedConfigFile}"
+                                      CanUserAddRows="False">
+        <DataGrid.Columns>
+            <DataGridTemplateColumn Width="*" Header="Name">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Button ToolTip="Edit"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.EditCommand}" 
+                                    CommandParameter="{Binding}">
+                                <materialDesign:PackIcon Kind="Edit" />
+                            </Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

@@ -1,0 +1,49 @@
+﻿<Window x:Class="DialogHost.FromViewModel.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" Height="350" Width="525"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:vms="clr-namespace:DialogHost.FromViewModel.ViewModels"
+        Loaded="MainWindow_OnLoaded">
+    <materialDesign:DialogHost Identifier="RootDialogHost">
+        <materialDesign:DialogHost.DialogContentTemplate>
+            <DataTemplate>
+                <DataTemplate.Resources>
+                    <DataTemplate DataType="{x:Type vms:EditTextViewModel}">
+                        <Grid Margin="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="Edit"
+                                                             Grid.Row="0" Grid.Column="0"/>
+                            <TextBlock Text="{Binding Title}"
+                                               Grid.Row="0" Grid.Column="1"/>
+                            <TextBox Text="{Binding TextValue}"
+                                             Grid.Row="1" Grid.Column="1"
+                                             materialDesign:HintAssist.Hint="{Binding TextName}"
+                                             ToolTip="{Binding TextName}"/>
+                            <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1">
+                                <Button Content="_Ok" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                    <Button.CommandParameter>
+                                        <system:Boolean>True</system:Boolean>
+                                    </Button.CommandParameter>
+                                </Button>
+                                <Button Content="_Cancel" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </DataTemplate.Resources>
+            </DataTemplate>
+        </materialDesign:DialogHost.DialogContentTemplate>
+        <ContentControl prism:RegionManager.RegionName="ContentRegion" />
+    </materialDesign:DialogHost>
+</Window>
