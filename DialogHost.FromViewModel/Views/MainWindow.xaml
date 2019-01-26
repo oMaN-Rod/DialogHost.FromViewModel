@@ -42,6 +42,7 @@
                         </Grid>
                     </DataTemplate>
                 </DataTemplate.Resources>
+                <ContentControl Content="{Binding}" />
             </DataTemplate>
         </materialDesign:DialogHost.DialogContentTemplate>
         <ContentControl prism:RegionManager.RegionName="ContentRegion" />
